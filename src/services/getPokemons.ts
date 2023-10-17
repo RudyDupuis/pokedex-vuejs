@@ -1,6 +1,6 @@
 import type { PokemonCard, PokemonPage } from "@/interface";
 
-export const getPokemons = async (): Promise[] => {
+export const getPokemons = async (): Promise<PokemonCard[]> => {
     try {
       const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=42");
   
@@ -36,12 +36,14 @@ export const getPokemonById = async (id: number): Promise<PokemonPage | null> =>
       types: data.types.map((type: any) => type.type.name),
       weight: data.weight,
       height: data.height,
-      hp: data.stats[0].base_stat,
-      attack: data.stats[1].base_stat,
-      defense: data.stats[2].base_stat,
-      specialAttack: data.stats[3].base_stat,
-      specialDefense: data.stats[4].base_stat,
-      speed: data.stats[5].base_stat,
+      stats: {
+        hp: data.stats[0].base_stat,
+        attack: data.stats[1].base_stat,
+        defense: data.stats[2].base_stat,
+        specialAttack: data.stats[3].base_stat,
+        specialDefense: data.stats[4].base_stat,
+        speed: data.stats[5].base_stat,
+      }
     };
 
   } catch (error) {

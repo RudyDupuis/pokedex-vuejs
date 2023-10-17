@@ -101,13 +101,39 @@
     }
 
     &_stats {
-      div {
+      &--stat {
         margin-bottom: 8px;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      &_desc {
+        margin-bottom: 0;
+      }
+      &_stats {
+        &--stat {
+          flex-direction: column;
+          margin-bottom: 6px;
+        }
+
+        p {
+          margin-bottom: 4px;
+        }
+      }
+    }
+
+    @media (max-width: 450px) {
+      &_desc--type {
+        flex-direction: column;
+
+        p {
+          margin-bottom: 16px;
+        }
       }
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     flex-direction: column;
     height: auto;
 
@@ -126,5 +152,104 @@
       height: 300px;
       margin-bottom: 16px;
     }
+  }
+}
+
+.types {
+  span {
+    padding: 5px 20px;
+    background: $grey;
+    border-radius: 10px;
+    color: $light;
+
+    &:nth-child(2) {
+      margin-left: 8px;
+    }
+  }
+
+  .bug {
+    background: #3b9950;
+  }
+
+  .dark {
+    background: #5a5979;
+  }
+
+  .dragon {
+    background: #61cad9;
+  }
+
+  .electric {
+    background: #e3e32b;
+  }
+
+  .fairy {
+    background: #ea1369;
+  }
+
+  .fighting {
+    background: #ef6138;
+  }
+
+  .fire {
+    background: #d7282e;
+  }
+
+  .flying {
+    background: #93b2c7;
+  }
+
+  .ghost {
+    background: #906790;
+  }
+
+  .grass {
+    background: #27cb4f;
+  }
+
+  .ground {
+    background: #6e491f;
+  }
+
+  .ice {
+    background: #86d2f5;
+  }
+
+  .normal {
+    background: #ca98a7;
+  }
+
+  .poison {
+    background: #9b69d9;
+  }
+
+  .psychic {
+    background: #f81c91;
+  }
+
+  .rock {
+    background: #8b3e21;
+  }
+
+  .steel {
+    background: #5f756d;
+  }
+
+  .water {
+    background: #1552e2;
+  }
+}
+
+.stat-bar {
+  height: 16px;
+  width: 200px;
+  border-radius: 20px;
+  background: $grey;
+
+  &__value {
+    background: $primary;
+    border-radius: 20px;
+    height: 16px;
+    width: 0;
   }
 }

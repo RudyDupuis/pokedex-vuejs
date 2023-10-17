@@ -17,43 +17,23 @@
                 <button v-on:click="displayShiny()" class="button" ><img src="../assets/img/shiny.svg" alt="shiny" /></button>
             </div>
             <div class="pokemon-desc_right_desc">
-                <div class="df-aic-jcsb">
-                    <p>Types:</p>
-                    <p>{{ pokemon.types.join(' ') }}</p>
+                <div class="df-aic-jcsb pokemon-desc_right_desc--type">
+                    <p>Types :</p>
+                    <Type :types="pokemon.types"></Type>
                 </div>
                 <div class="df-aic-jcsb">
-                    <p>Weight:</p>
-                    <p>{{ pokemon.weight }}</p>
+                    <p>Weight :</p>
+                    <p>{{ (pokemon.weight * 0.1).toFixed(1) }} kg</p>
                 </div>
                 <div class="df-aic-jcsb">
-                    <p>Height:</p>
-                    <p>{{ pokemon.height}}</p>
+                    <p>Height :</p>
+                    <p>{{ (pokemon.height * 0.1).toFixed(1) }} m</p>
                 </div>    
             </div>
             <div class="pokemon-desc_right_stats">
-                <div class="df-aic-jcsb">
-                    <p>Hp:</p>
-                    <p>{{ pokemon.hp}}</p>
-                </div>
-                <div class="df-aic-jcsb">
-                    <p>Attack</p>
-                    <p>{{ pokemon.attack}}</p>
-                </div>
-                <div class="df-aic-jcsb">
-                    <p>Defense</p>
-                    <p>{{ pokemon.defense}}</p>
-                </div>
-                <div class="df-aic-jcsb">
-                    <p>Special Attack:</p>
-                    <p>{{ pokemon.specialAttack}}</p>
-                </div>
-                <div class="df-aic-jcsb">
-                    <p>Special Defense:</p>
-                    <p>{{ pokemon.specialDefense}}</p>
-                </div>
-                <div class="df-aic-jcsb">
-                    <p>Speed:</p>
-                    <p>{{ pokemon.speed}}</p>
+               <div v-for="(stat, key) in pokemon.stats" :key="key" class="df-aic-jcsb pokemon-desc_right_stats--stat">
+                    <p>{{ capitalizeFirstLetter(key) }} :</p>
+                    <StatBare :stat="stat"></StatBare>
                 </div>
             </div>
         </div>
@@ -76,8 +56,14 @@ import { defineComponent } from 'vue';
 import { getPokemonById } from '@/services/getPokemons';
 import { type PokemonPage } from '@/interface';
 
+import Type from '@/components/Type.vue';
+import StatBare from '@/components/StatBar.vue';
 
 export default defineComponent({
+    components: {
+        Type,
+        StatBare,
+    },
     props: {
         id: String,
     },
@@ -99,6 +85,9 @@ export default defineComponent({
             } else {
                 this.imgUrl = this.imgUrlBase
             }
+        },
+        capitalizeFirstLetter(str : String) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
         }
     },
     async beforeMount() {
