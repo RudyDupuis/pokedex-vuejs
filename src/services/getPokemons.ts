@@ -1,6 +1,6 @@
 import type { PokemonCard, PokemonPage } from "@/interface";
 
-export const getPokemons = async () => {
+export const getPokemons = async (): Promise[] => {
     try {
       const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=42");
   

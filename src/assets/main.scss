@@ -54,6 +54,7 @@ input {
 }
 
 /***** Class *****/
+@import "./sections";
 
 //Flex
 .df-aic-jcsb {
@@ -80,64 +81,6 @@ input {
   padding-top: 32px;
 }
 
-//Section
-.little-section {
-  height: 100px;
-  width: 100%;
-  padding: 0 64px;
-
-  &-mc {
-    @media (max-width: 600px) {
-      flex-direction: column;
-      padding: 32px 0;
-      height: 150px;
-    }
-  }
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(7, 128px);
-  gap: 16px;
-
-  @media (max-width: 1100px) {
-    grid-template-columns: repeat(6, 128px);
-  }
-
-  @media (max-width: 950px) {
-    grid-template-columns: repeat(5, 128px);
-  }
-
-  @media (max-width: 780px) {
-    grid-template-columns: repeat(4, 128px);
-  }
-
-  @media (max-width: 620px) {
-    grid-template-columns: repeat(3, 128px);
-  }
-
-  @media (max-width: 450px) {
-    grid-template-columns: repeat(2, 128px);
-  }
-}
-
-.card {
-  background: $light;
-  border-radius: 20px;
-  width: 128px;
-  height: 160px;
-  padding-bottom: 16px;
-
-  &__number {
-    font-size: 10px;
-  }
-
-  &:hover {
-    cursor: pointer;
-    background: $grey;
-    box-shadow: 0 0 0 3px $primary, 0 0 0 5px $light;
-  }
-}
 //Text
 .light-20px {
   color: $light;

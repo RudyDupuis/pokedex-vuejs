@@ -14,6 +14,11 @@
             </div>
           </router-link>
       </section>
+
+      <div v-else>
+        <p>Loading Pokémon data...</p>
+      </div>
+      
     </main>
   </template>
   
