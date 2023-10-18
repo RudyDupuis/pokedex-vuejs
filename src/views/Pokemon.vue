@@ -1,7 +1,7 @@
 <template>
     <header class="df-aic-jcsb little-section">
-        <router-link to="/"><h2 class="light-20px">Pokedex</h2></router-link>
-        <router-link to="/"><img src="../assets/img/go-back.svg" alt="arrow go back" class="button" /></router-link>
+        <h2 class="light-20px">Pokedex</h2>
+        <router-link to="/"><goBack/></router-link>
       </header>
 
       <main>
@@ -14,7 +14,7 @@
                     <h3>{{ formatText(pokemon.name) }}</h3>
                     <p>N°: {{ pokemon.number }}</p>
                 </div>
-                <button v-on:click="displayShiny()" class="button" ><img src="../assets/img/shiny.svg" alt="shiny" /></button>
+                <button v-on:click="displayShiny()" class="button" ><shiny :active="shinyActive"/></button>
             </div>
             <div class="pokemon-desc_right_desc">
                 <div class="df-aic-jcsb pokemon-desc_right_desc--type">
@@ -46,8 +46,8 @@
     </main>
 
     <footer v-if="pokemon" class="df-aic-jcsb little-section">
-        <img src="../assets/img/go-before.svg" alt="arrow go before" class="button" v-on:click="changePokemon(pokemon.number - 1)" v-if="pokemon.number - 1 != 0"/>
-        <img src="../assets/img/go-after.svg" alt="arrow go after" class="button"  v-on:click="changePokemon(pokemon.number + 1)" />
+        <goBefore v-on:click="changePokemon(pokemon.number - 1)" v-if="pokemon.number - 1 != 0"/>
+        <goAfter v-on:click="changePokemon(pokemon.number + 1)"/>
     </footer>
 </template>
 
@@ -59,12 +59,21 @@ import { type PokemonPage } from '@/interface';
 import Type from '@/components/Type.vue';
 import StatBare from '@/components/StatBar.vue';
 
+import goBack from '@/assets/img/goBack.vue';
+import goBefore from '@/assets/img/goBefore.vue';
+import goAfter from '@/assets/img/goAfter.vue';
+import shiny from '@/assets/img/shiny.vue';
+
 import { formatText } from '@/filters';
 
 export default defineComponent({
     components: {
         Type,
         StatBare,
+        goBack,
+        goBefore,
+        goAfter,
+        shiny,
     },
     props: {
         id: String,
@@ -74,18 +83,22 @@ export default defineComponent({
             pokemon: null as PokemonPage | null,
             imgUrlBase: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/', 
             imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/',
+            shinyActive: false
         };
     },
     methods: {
         async changePokemon (id : number) {
             this.pokemon = await getPokemonById(id);
             this.imgUrl = this.imgUrlBase;
+            this.shinyActive = false;
         },
         displayShiny() {
             if(this.imgUrl === this.imgUrlBase) {
-                this.imgUrl = this.imgUrlBase + "shiny/"
+                this.imgUrl = this.imgUrlBase + "shiny/";
+                this.shinyActive = true;
             } else {
-                this.imgUrl = this.imgUrlBase
+                this.imgUrl = this.imgUrlBase;
+                this.shinyActive = false;
             }
         },
         formatText,

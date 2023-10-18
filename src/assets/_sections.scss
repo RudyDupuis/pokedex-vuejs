@@ -67,7 +67,13 @@
 
   &:hover {
     path {
-      fill: $dark;
+      fill: $dark-grey;
+    }
+  }
+
+  &--active {
+    path {
+      fill: $primary;
     }
   }
 }
