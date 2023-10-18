@@ -16,6 +16,20 @@
   }
 }
 
+.search {
+  position: relative;
+
+  &__img {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    width: 24px;
+    height: 24px;
+    background: url("../assets/img/search.svg");
+    transform: translate(-50%, -50%);
+  }
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(7, 128px);

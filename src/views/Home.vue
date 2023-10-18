@@ -1,7 +1,10 @@
 <template>
     <header class="df-aic-jcsb little-section little-section-mc">
       <h2 class="light-20px">Pokedex</h2>
-      <input type="text" placeholder="Name or number" v-on:input="searchPokemon()" v-model="searchTerm" />
+      <div class="search">
+        <input type="text" placeholder="Name or number" v-on:input="searchPokemon()" v-model="searchTerm" />
+        <div class="search__img"></div>
+      </div>
     </header>
 
     <main class="df-alc-jcc pt32px">
