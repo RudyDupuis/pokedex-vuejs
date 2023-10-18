@@ -11,7 +11,7 @@
         <div class="pokemon-desc_right">
             <div class="df-aic-jcsb pokemon-desc_right_name">
                 <div>
-                    <h3>{{ capitalizeFirstLetter(replaceHyphensWithSpaces(pokemon.name)) }}</h3>
+                    <h3>{{ formatText(pokemon.name) }}</h3>
                     <p>N°: {{ pokemon.number }}</p>
                 </div>
                 <button v-on:click="displayShiny()" class="button" ><img src="../assets/img/shiny.svg" alt="shiny" /></button>
@@ -32,7 +32,7 @@
             </div>
             <div class="pokemon-desc_right_stats">
                <div v-for="(stat, key) in pokemon.stats" :key="key" class="df-aic-jcsb pokemon-desc_right_stats--stat">
-                    <p>{{ capitalizeFirstLetter(replaceHyphensWithSpaces(key))}} :</p>
+                    <p>{{ formatText(key) }} :</p>
                     <StatBare :stat="stat"></StatBare>
                 </div>
             </div>
@@ -59,7 +59,7 @@ import { type PokemonPage } from '@/interface';
 import Type from '@/components/Type.vue';
 import StatBare from '@/components/StatBar.vue';
 
-import { capitalizeFirstLetter, replaceHyphensWithSpaces } from '@/filters';
+import { formatText } from '@/filters';
 
 export default defineComponent({
     components: {
@@ -88,8 +88,7 @@ export default defineComponent({
                 this.imgUrl = this.imgUrlBase
             }
         },
-        capitalizeFirstLetter,
-        replaceHyphensWithSpaces,
+        formatText,
     },
     async beforeMount() {
         if (this.id) {

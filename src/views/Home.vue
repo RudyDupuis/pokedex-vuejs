@@ -5,15 +5,19 @@
     </header>
 
     <main class="df-alc-jcc pt32px">
-      <section class="grid" v-if="pokemons">
+      <section class="grid" v-if="pokemons && pokemons.length != 0">
           <router-link  v-for="p in pokemons" :key="p.number" :to="'pokemon/' + p.number">
             <div class="card df-fdc-aic-jcse">
               <img :src="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + p.number + '.png'" :alt="p.name" />
               <p class="card__number">N° {{ p.number }}</p>
-              <p>{{ capitalizeFirstLetter(replaceHyphensWithSpaces(p.name)) }}</p>
+              <p>{{ formatText(p.name) }}</p>
             </div>
           </router-link>
       </section>
+
+      <div v-else-if="pokemons">
+        <p>No results for your search</p>
+      </div>
 
       <div v-else>
         <div class="loader"></div>
@@ -27,7 +31,7 @@
   import { type PokemonCard } from "@/interface";
   import { getStartPokemons, searchPokemonByName, searchPokemonByNumber } from "@/services/getPokemons";
 
-  import { capitalizeFirstLetter, replaceHyphensWithSpaces } from '@/filters';
+  import { formatText } from '@/filters';
   
   export default defineComponent({
     data() {
@@ -46,8 +50,7 @@
           this.pokemons = await searchPokemonByNumber(this.searchTerm);
         }
       },
-      capitalizeFirstLetter,
-      replaceHyphensWithSpaces,
+      formatText
     },
     async beforeMount() {
         this.pokemons = await getStartPokemons();
