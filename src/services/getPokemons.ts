@@ -15,9 +15,9 @@ export const getStartPokemons = async (): Promise<PokemonCard[]> => {
 
         pokemons.push(pokemon);
       });
-
+      
       return pokemons;
-
+      
     } catch (error) {
       console.error(error);
       return [];
@@ -40,8 +40,8 @@ export const getPokemonById = async (id: number): Promise<PokemonPage | null> =>
         hp: data.stats[0].base_stat,
         attack: data.stats[1].base_stat,
         defense: data.stats[2].base_stat,
-        specialAttack: data.stats[3].base_stat,
-        specialDefense: data.stats[4].base_stat,
+        'special-attack': data.stats[3].base_stat,
+        'special-defense': data.stats[4].base_stat,
         speed: data.stats[5].base_stat,
       }
     };

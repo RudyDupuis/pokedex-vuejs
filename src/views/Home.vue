@@ -10,13 +10,13 @@
             <div class="card df-fdc-aic-jcse">
               <img :src="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + p.number + '.png'" :alt="p.name" />
               <p class="card__number">N° {{ p.number }}</p>
-              <p>{{ p.name }}</p>
+              <p>{{ capitalizeFirstLetter(replaceHyphensWithSpaces(p.name)) }}</p>
             </div>
           </router-link>
       </section>
 
       <div v-else>
-        <p>Loading Pokémon data...</p>
+        <div class="loader"></div>
       </div>
       
     </main>
@@ -26,6 +26,8 @@
   import { defineComponent } from "vue";
   import { type PokemonCard } from "@/interface";
   import { getStartPokemons, searchPokemonByName, searchPokemonByNumber } from "@/services/getPokemons";
+
+  import { capitalizeFirstLetter, replaceHyphensWithSpaces } from '@/filters';
   
   export default defineComponent({
     data() {
@@ -43,7 +45,9 @@
         } else {
           this.pokemons = await searchPokemonByNumber(this.searchTerm);
         }
-      }
+      },
+      capitalizeFirstLetter,
+      replaceHyphensWithSpaces,
     },
     async beforeMount() {
         this.pokemons = await getStartPokemons();
