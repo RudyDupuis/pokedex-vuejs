@@ -1,7 +1,7 @@
 <template>
     <header class="df-aic-jcsb little-section little-section-mc">
       <h2 class="light-20px">Pokedex</h2>
-      <input type="text" placeholder="Name or number" />
+      <input type="text" placeholder="Name or number" v-on:input="searchPokemon()" v-model="searchTerm" />
     </header>
 
     <main class="df-alc-jcc pt32px">
@@ -23,18 +23,30 @@
   </template>
   
   <script lang="ts">
-  import { defineComponent, ref, onBeforeMount } from "vue";
+  import { defineComponent } from "vue";
   import { type PokemonCard } from "@/interface";
-  import { getPokemons } from "@/services/getPokemons";
+  import { getStartPokemons, searchPokemonByName, searchPokemonByNumber } from "@/services/getPokemons";
   
   export default defineComponent({
     data() {
       return {
         pokemons: null as PokemonCard[] | null,
+        searchTerm: "",
       };
     },
+    methods : {
+      async searchPokemon() {
+        if(isNaN(Number(this.searchTerm))){
+          this.pokemons = await searchPokemonByName(this.searchTerm);
+        } else if (this.searchTerm === "") {
+          this.pokemons = await getStartPokemons();
+        } else {
+          this.pokemons = await searchPokemonByNumber(this.searchTerm);
+        }
+      }
+    },
     async beforeMount() {
-        this.pokemons = await getPokemons();
+        this.pokemons = await getStartPokemons();
     },
   });
   </script>

@@ -1,6 +1,6 @@
 <template>
     <div class="stat-bar">
-        <div class="stat-bar__value" :style="{ width: (stat * 255 / 200) + 'px' }"></div>
+        <div class="stat-bar__value" :style="{ width: (stat * 200 / 255) + 'px' }"></div>
     </div>
 </template>
 
